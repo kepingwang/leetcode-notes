@@ -47,6 +47,23 @@ Keep int[] size.
 find(i) finds the root if i.  
 union(i, j), find roots, makes larger tree the parent.  
 
+<a name="IntervalTree"></a>
+**IntervalTree**:
+Add and remove intervals dynamically. Find if a given interval overlaps with any existing one.  
+Node stores ((low, high), maxHighVal at this subtree) 
+Nodes are ordered by low.  
+If a node stores ((10, 15), 30), then its left subtree 
+To search I: 
+```
+if hit, return true;
+if (curr.left != null && curr.left.max > I.lo):
+    go left; (or I won't over lap with left subtree)
+else:
+    go right;
+```
+If we go left and there is no hit. In left subtree there must be an interval [a, max], since `max > I.lo` and there is no overlapping, we know `I.hi < a`. Since the nodes are ordered by low, then there won't be overlapping either in right subtree.
+
+
 ****
 ## Algorithms
 
@@ -55,6 +72,8 @@ union(i, j), find roots, makes larger tree the parent.
 Store left and right ends of line segments together, and sort these critical points.  
 Do certain things on meeting left or right end point.
 Usually keep a set of existing elements. (tree set for order)
+
+Check out [**Geometric Search**](https://github.com/kepingwang/leetcode-notes/blob/master/slides/GeometricSearchPrinceton.pdf)!
 
 <a name="TopologicalSort"></a>
 **Topological Sort**:
