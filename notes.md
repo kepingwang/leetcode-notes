@@ -191,8 +191,9 @@ LC239 Sliding Window Maximum
 3. [Monotonic Queue](#MonotonicQueue).  
 
 L42 Trapping Rain Water  
-[Monotonic Queue](#MonotonicQueue)  
-![trap-rain-water](http://www.leetcode.com/wp-content/uploads/2012/08/rainwatertrap.png)
+Given [0,1,0,2,1,0,1,3,2,1,2,1], return 6.  
+![trap-rain-water](https://github.com/kepingwang/leetcode-notes/blob/master/images/LC42_rainwatertrap.png?raw=true)  
+[Monotonic Queue](#MonotonicQueue)
 
 LC318 Maximum Product of Word Lengths  
 Given a string array words, find the maximum value of length(word[i]) * length(word[j]) where the two words do not share common letters.  
