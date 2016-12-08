@@ -73,7 +73,8 @@ Store left and right ends of line segments together, and sort these critical poi
 Do certain things on meeting left or right end point.
 Usually keep a set of existing elements. (tree set for order)
 
-Check out [**Geometric Search**](https://github.com/kepingwang/leetcode-notes/blob/master/slides/GeometricSearchPrinceton.pdf)!
+Check out [**Geometric Search**](https://github.com/kepingwang/leetcode-notes/blob/master/slides/GeometricSearchPrinceton.pdf)!  
+Rectangle Intersection Search = Sweep Line + Interval Tree.
 
 <a name="TopologicalSort"></a>
 **Topological Sort**:
