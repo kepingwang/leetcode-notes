@@ -76,6 +76,9 @@ Usually keep a set of existing elements. (tree set for order)
 Check out [**Geometric Search**](https://github.com/kepingwang/leetcode-notes/blob/master/slides/GeometricSearchPrinceton.pdf)!  
 Rectangle Intersection Search = Sweep Line + Interval Tree.
 
+### Graph Algorithms:  
+Check out [Princeton Algorithms](http://algs4.cs.princeton.edu/40graphs/)
+
 <a name="TopologicalSort"></a>
 **Topological Sort**:
 1. DFS, push vertex value to stack after all subtrees. For each unvisited node, start dfs.  
@@ -88,6 +91,70 @@ for each node m with an edge e from n to m do
         insert m into S
 ```
 
+**Relaxation**:
+```
+private void relax(DirectedEdge e) {
+    int v = e.from(), w = e.to();
+    if (distTo[w] > distTo[v] + e.weight()) {
+        distTo[w] = distTo[v] + e.weight();
+        edgeTo[w] = e;
+    }
+}
+
+private void relax(EdgeWeightedDigraph G, int v) {
+    for (DirectedEdge e : G.adj(v)) {
+        int w = e.to();
+        if (distTo[w] > distTo[v] + e.weight()) {
+            distTo[w] = distTo[v] + e.weight();
+            edgeTo[w] = e;
+        }
+    }
+}
+```
+
+**Dijkstra's Shortest Path**:  
+Dijkstra's algorithm initializing dist[s] to 0 and all other distTo[] entries to positive infinity. Then, it repeatedly relaxes and adds to the tree a non-tree vertex with the lowest (priority queue) distTo[] value, continuing until all vertices are on the tree or no non-tree vertex has a finite distTo[] value. (Non-negative weights, directed or undirected.) O(E + Vlog(V))
+
+**Topological Sort for Single Source Shortest Path in DAG**: (Allowing negative weights)  
+Initialize distTo[] and relax vertices in topological order. O(E + V)  
+Can also solve **Longest Path in DAG** by initializing dist to NEGATIVE_INFINITY, and switching the sense of the inequality in relax().
+
+**Bellman Ford Shortest Path**:
+Initialize distTo[]. Then, considering the digraph's edges in any order, and relax all edges. Make V such passes. Always O(VE).
+* Queue Based Implementation: The only edges that could lead to a change in distTo[] are those leaving a vertex whose distTo[] value changed in the previous pass. To keep track of such vertices, we use a FIFO queue.  
+* Negative Cycle: There is a negative cycle reachable from the source if and only if the queue is nonempty after the Vth pass through all the edges. Moreover, the subgraph of edges in our edgeTo[] array must contain a negative cycle.  
+* Arbitrage Detection: Application of Negatice cycle detection.  
+* Why it works: It first calculates the shortest distances for the shortest paths which have at-most one edge in the path. Then, it calculates shortest paths with at-nost 2 edges, and so on. After the ith iteration of outer loop, the shortest paths with at most i edges are calculated.
+
+**Floyd Warshall All Pairs Shortest Path**:  
+Update distance matrix between vertices, checking an intermediate vertex for all pairs, for all vertices as interdemiate.
+```
+/* Add all vertices one by one to the set of intermediate
+   vertices.
+  ---> Before start of a iteration, we have shortest
+       distances between all pairs of vertices such that
+       the shortest distances consider only the vertices in
+       set {0, 1, 2, .. k-1} as intermediate vertices.
+  ----> After the end of a iteration, vertex no. k is added
+        to the set of intermediate vertices and the set
+        becomes {0, 1, 2, .. k} */
+for (k = 0; k < V; k++)
+{
+    // Pick all vertices as source one by one
+    for (i = 0; i < V; i++)
+    {
+        // Pick all vertices as destination for the
+        // above picked source
+        for (j = 0; j < V; j++)
+        {
+            // If vertex k is on the shortest path from
+            // i to j, then update the value of dist[i][j]
+            if (dist[i][k] + dist[k][j] < dist[i][j])
+                dist[i][j] = dist[i][k] + dist[k][j];
+        }
+    }
+}
+ ```
 
 ****
 ## Problems
