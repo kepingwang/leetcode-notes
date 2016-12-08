@@ -155,6 +155,24 @@ for (k = 0; k < V; k++)
     }
 }
  ```
+ 
+**Minimum Spanning Tree**:  
+* Cut Property: Given any cut in an edge-weighted graph (with all edge weights distinct), the crossing edge of minimum weight is in the MST of the graph.  
+* Greedy Algorithm: Start with all edges gray, find a cut with no black edges, color its minimum-weight edge black. Loop until V-1 edges are colored black.  
+
+
+**Prim's Algorithm MST**:  
+Attach an edge to a single growing tree at each time.
+![prim](https://github.com/kepingwang/leetcode-notes/blob/master/images/prim.png)  
+* Lazy Implementation O(Elog(E)):  
+![prim-lazy](https://github.com/kepingwang/leetcode-notes/blob/master/images/prim-lazy.png)
+* Eager Implementation O(Elog(V)): maintain on the priority queue just one edge for each non-tree vertex: the shortest edge that connects it to the tree.  
+![prim-eager](https://github.com/kepingwang/leetcode-notes/blob/master/images/prim-eager.png)
+
+**Kruskal's Algorithm MST**:
+Each time color black an minimum-weight gray edge that doesn't form a cycle with existing black edges.  
+![kruskal](https://github.com/kepingwang/leetcode-notes/blob/master/images/kruskal.png)  
+Implementation O(Elog(E)): priority queue to consider the edges in order by weight, _a **union-find** data structure to identify those that cause cycles_, and a queue to collect the MST edges.
 
 ****
 ## Problems
