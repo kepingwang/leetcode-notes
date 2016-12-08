@@ -38,7 +38,7 @@ Can be applied to sum, min, max...
 <a name="Trie"></a>
 **Trie**:  
 Each node has **26** (or 256, or ...) children. Boolean flag to mark hasWord.  
-Optimize prefix string search.
+Optimize prefix string search.  Build recursively. 
 
 <a name="UnionFind"></a>
 **UnionFind**:  
@@ -322,3 +322,5 @@ If we are doing backtracking on a 2D board, we can save the space of `boolean[][
 
 Trie: First store all words in the trie (in particular, remember the words at leaf nodes). Then start backtracking using the board with the trie starting from each board position. This is really smart. Normally we would backtrack to search for one matching path, but here since multiple matching pathes may share the same prefix, we can actually search for multiple paths simultaneously.
 
+LC421 Maximum XOR of Two Numbers in an Array O(n)  
+Bit Manipulation and Trie. Not all trees are O(log(n)) search, Trie is O(M) search, where M is number of characters per word (or here number of bits in a num).
