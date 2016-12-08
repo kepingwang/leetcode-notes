@@ -35,17 +35,43 @@ update: add delta from root to leaf.
 resultRange: break down (i, j) to merge result of avail ranges in tree.  
 Can be applied to sum, min, max...
 
+<a name="Trie"></a>
+**Trie**:  
+Each node has **26** (or 256, or ...) children. Boolean flag to mark hasWord.  
+Optimize prefix string search.
+
+<a name="UnionFind"></a>
+**UnionFind**:  
+int[] p, p[i] is the parent if i.  
+Keep int[] size.  
+find(i) finds the root if i.  
+union(i, j), find roots, makes larger tree the parent.  
+
 ****
 ## Algorithms
-todo...
+
+<a name="SweepLine"></a>
+**Sweep Line**:  
+Store left and right ends of line segments together, and sort these critical points.  
+Do certain things on meeting left or right end point.
+Usually keep a set of existing elements. (tree set for order)
+
+<a name="TopologicalSort"></a>
+**Topological Sort**:
+1. DFS, push vertex value to stack after all subtrees. For each unvisited node, start dfs.  
+Cycle Detection: white node (0) unvisited, grey node (1) visited but unfinished, black node (2) finished. There is cycle is a child is grey (meaning it's an ancestor).  
+2. BFS (Kahn's algorithm), first insert all start nodes (outdegree == 0) into queue.
+```
+for each node m with an edge e from n to m do
+    remove edge e from the graph
+    if m has no other incoming edges then
+        insert m into S
+```
 
 
 ****
 ## Problems
-LC239 Sliding Window Maximum  
-1. A segment tree, O(nlg(n)).  
-2. Custom Linked-PriorityQueue, store linked nodes in array. O(nlog(n)). Hard to code up.  
-3. [Monotonic Queue](#MonotonicQueue).  
+
 
 LC388 Longest Absolute File Path  
 Just use a stack for the parent path.
@@ -57,3 +83,109 @@ LC308 Range Sum Query 2D - Mutable
 Immutable case: store prefix sum.  
 Mutable 1d: [BIT](#BinaryIndexedTree) or [Segment Tree](#SegmentTree)  
 Mutable 2d: 2D [BIT](#BinaryIndexedTree) or [Quad Tree](https://en.wikipedia.org/wiki/Quadtree)
+
+LC425 Word Square  
+```
+b a l l  
+a r e a  
+l e a d  
+l a d y  
+```
+Given words, find all possible word squares.  
+DFS (or BFS) + [Trie](#Trie) for faster searching.
+
+Google Phone 1: Find all identical subtrees in a binary tree  
+Although it's a tree, hashing is the best way to find same.  
+Calculate and store the hashCode of each node. O(n) all hash values.  
+Traverse the tree, keep a hash set of existing nodes (subtrees),  
+and find duplicates along the way.
+
+LC298 Binary Tree Longest Consecutive Sequence  
+LC320 Abbreviation (word -> (w1rd, 1ord, w3, ...))  
+Graph searching, usually dfs.
+Sometimes we add the result for each recursion,  
+sometimes only at recursion termination.
+Sometimes there is only one starting point, 
+sometimes we create new starting points all along the way.  
+
+LC271 Encode and Decode Strings  
+Serialize string array. Header for string lengths.  
+LC297 Serialize and Deserialize Binary Tree  
+Tree serialization, level-order (bfs) or pre-order (dfs).  
+Just write down null (as "X").
+
+LC317 Shortest Distance from All Buildings  
+Just stupid BFS from all buildings. Only minor optimization can be done.  
+
+LC200 Number of Islands
+LC305 Number of Islands II  
+0 1 1  
+1 0 0  
+0 0 1  
+3 islands  
+Immutable case can use DFS.
+Mutable only [Union Find](#UnionFind).
+
+LC289 Game of Life  
+Cellular automaton. Cell lives or dies depends on number of neighbors.
+Must update all cells simultaniesly. 
+The trick for O(1) space is to use int to store udpated state and original state together.
+
+LC259 3Sum Smaller  
+2Sum, 3Sum, similar. Sort and use two pointers left and right.  
+If to find sum certain value, hashing may be used.
+
+LC411 Minimum Unique Word Abbreviation  
+It's NP hard?  
+Bit Manipulation + DFS.  
+
+LC391 Perfect Rectangle
+Count the number of corners, so smart!  
+Odd number corners only possible at corners of the big rectangle  
+
+LC399 Evaluate Division (given some know equations, find val of target equation)  
+Graph search, dfs.  
+
+LC218 The Skyline Problem (find contours of some skylines)  
+[Sweep Line](#SweepLine).
+
+LC56 Merge Intervals  
+For intervals, often times we can succeed by sorting on one end.
+
+LC295 Find Median from Data Stream  
+My stupid method: build a custom tree with count for duplicates.  
+Smart approach: use one min heap and one max heap.
+
+LC329 Longest Increasing Path in a Matrix  
+DFS, optimize with memoization.
+
+LC380 Insert Delete GetRandom O(1)  
+ArrayList with HashMap(val, index in array)  
+To remove, swap the target with last, and remove last.
+
+LC315 Count of Smaller Numbers After Self for Each Number  
+1. A BST allowing for duplicates.
+2. Mergesort counting jumps from right to left.
+
+LC294 Flip Game II (flip ++ to --, lose if cannot flip anymore)
+DFS + memoization.  
+Lose win game: if for you win for any of the possible next steps, then I lose.
+
+LC276 Paint Fence (n posts, k colors, no 3 adjacent same color)  
+Google 2: Eat pills, half at a time, probability of getting full pill at n times.  
+Two types subproblem recursion, with memoization. (Or DP).
+
+LC253 Meeting Rooms II (find number of meeting rooms required)  
+[[0, 30],[5, 10],[15, 20]]. ans 2.
+sort by starting time, and keep a heap max of ending time.
+Merge meetings if a new starting time is later than max end time, else add meeting to heap.
+Finally the number of meetings in heap will be the meeting rooms required.
+
+LC269 Alien Dictionary (Given a sorted list of words, return order of chars)  
+chars(or int) as nodes, directed edges indicating relative orders.  
+Finally return the order by a [topological sort](#TopologicalSort).
+
+LC239 Sliding Window Maximum  
+1. A segment tree, O(nlg(n)).  
+2. Custom Linked-PriorityQueue, store linked nodes in array. O(nlog(n)). Hard to code up.  
+3. [Monotonic Queue](#MonotonicQueue).  
