@@ -189,3 +189,30 @@ LC239 Sliding Window Maximum
 1. A segment tree, O(nlg(n)).  
 2. Custom Linked-PriorityQueue, store linked nodes in array. O(nlog(n)). Hard to code up.  
 3. [Monotonic Queue](#MonotonicQueue).  
+
+L42 Trapping Rain Water  
+[Monotonic Queue](#MonotonicQueue)  
+![trap-rain-water](http://www.leetcode.com/wp-content/uploads/2012/08/rainwatertrap.png)
+
+LC318 Maximum Product of Word Lengths  
+Given a string array words, find the maximum value of length(word[i]) * length(word[j]) where the two words do not share common letters.  
+Only O(n^2) solution :( Can optimize with bit manipulation. int has 32 bits, but lower case only 26 chars. So it's common to use bit manipulation for chars.
+
+LC212 Word Search II
+```
+Given words = ["oath","pea","eat","rain"] and board =
+[
+  ['o','a','a','n'],
+  ['e','t','a','e'],
+  ['i','h','k','r'],
+  ['i','f','l','v']
+]
+Return ["eat","oath"].
+```
+Backtracking + [Trie](#Trie).  
+
+Backtracking: note that backtracking is different from dfs. DFS is to find a certain target vertex, while backtracking is to find a matching path. So we visit each node at most once in DFS (visited[i] = true). But in backtracking we may visit each node multiple times in different paths, so we have to remember to REMOVE NODE FROM PATH AT END OF EACH RECURSION, in particular, if we only keep boolean[] visited, we have to reset visited[i] = false.  
+If we are doing backtracking on a 2D board, we can save the space of `boolean[][] visited` by changing the values in the board.
+
+Trie: First store all words in the trie (in particular, remember the words at leaf nodes). Then start backtracking using the board with the trie starting from each board position. This is really smart. Normally we would backtrack to search for one matching path, but here since multiple matching pathes may share the same prefix, we can actually search for multiple paths simultaneously.
+
