@@ -76,8 +76,19 @@ Can you implement merge sort and quick sort?
 **Heap Sort:** Can be done O(nlog(n)) totally in-place, but has poor locality, bad cache performance.
 
 <a name="CountingSort"></a>
-**Counting Sort**:
-Based on keys between a specific range. It works by counting the number of objects having distinct key values, then doing some arithmetic to calculate the position of each object in the output sentence.
+**Counting Sort**:  
+Based on integer keys between a specific range. For example, if we have keys 2, 3, 5, then the range is [0, 5]. We count frequency of each number within range, and then the prefix sum of frequency is the number's position in the output array (After putting a number, we have to decrease that position by 1). While putting input to positions in output, iterate from the right end of input to ensure stableness.  
+ O(n+k) time, O(n+k) space, where k is range of keys.  
+
+**Radix Sort**:
+Do counting sort digit by digit (or bit by bit, or char by char) from the least significant digit. Takes time O(d * (n+b)), where d is number of digits, b is base number.  
+
+Problem: Sort n numbers in range from 0 to n^2 – 1 in linear time  
+Radix sort. If b is base size, there would be log_b(n^2) rounds, with O(n+b) each round. If we choose b = n, then we can finish in O(2 * 2n).
+
+**Bucket Sort**:
+Uniformly distributed floating point numbers within a range. Create n buckets, put input to buckets, and sort each bucket (insertion sort).  
+![Bucket Sort](https://github.com/kepingwang/leetcode-notes/blob/master/images/buckect-sort.png)
 
 ### Geometric Search:
 <a name="SweepLine"></a>
