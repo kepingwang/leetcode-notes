@@ -223,12 +223,6 @@ l a d y
 Given words, find all possible word squares.  
 DFS (or BFS) + [Trie](#Trie) for faster searching.
 
-Google Phone 1: Find all identical subtrees in a binary tree  
-Although it's a tree, hashing is the best way to find same.  
-Calculate and store the hashCode of each node. O(n) all hash values.  
-Traverse the tree, keep a hash set of existing nodes (subtrees),  
-and find duplicates along the way.
-
 LC298 Binary Tree Longest Consecutive Sequence  
 LC320 Abbreviation (word -> (w1rd, 1ord, w3, ...))  
 Graph searching, usually dfs.
@@ -301,8 +295,6 @@ DFS + memoization.
 Lose win game: if for you win for any of the possible next steps, then I lose.
 
 LC276 Paint Fence (n posts, k colors, no 3 adjacent same color)  
-Google 2: Eat pills, half at a time, probability of getting full pill at n times.  
-Two types subproblem recursion, with memoization. (Or DP).
 
 LC253 Meeting Rooms II (find number of meeting rooms required)  
 [[0, 30],[5, 10],[15, 20]]. ans 2.
