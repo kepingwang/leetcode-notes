@@ -361,4 +361,11 @@ LC274 H-Index: A scientist has index h if h of his/her N papers have at least h 
 LC162 Find Peak Element in Array. O(log(n)) required.  
 For some very simple array search problem, try to find log(n) solution! Find local maximum, mid2 = mid1+1, compare `nums[mid1]` and `nums[mid2]`  
 
-
+LC139 Word Break  
+Given a string s and a dictionary of words dict, determine if s can be segmented into a space-separated sequence of one or more dictionary words.  
+For example, given  
+s = "leetcode",  
+dict = ["leet", "code"].  
+Return true because "leetcode" can be segmented as "leet code".  
+1. Dynamic Programming  
+2. DFS + memoization, with Trie optimization.
