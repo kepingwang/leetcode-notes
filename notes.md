@@ -69,6 +69,17 @@ If we go left and there is no hit. In left subtree there must be an interval [a,
 ****
 ## Algorithms
 
+### Sorting Algorithms:
+
+Can you implement merge sort and quick sort?
+
+**Heap Sort:** Can be done O(nlog(n)) totally in-place, but has poor locality, bad cache performance.
+
+<a name="CountingSort"></a>
+**Counting Sort**:
+Based on keys between a specific range. It works by counting the number of objects having distinct key values, then doing some arithmetic to calculate the position of each object in the output sentence.
+
+### Geometric Search:
 <a name="SweepLine"></a>
 **Sweep Line**:  
 Store left and right ends of line segments together, and sort these critical points.  
@@ -331,3 +342,7 @@ LC128 Longest Consecutive Sequence O(n)
 1. HashMap and [Union-Find](#UnionFind). O(nlog(n)) in theory.  
 2. O(n) Solution: Store numbers in set, and check each streak from its start. A num is the start of a streak if (n-1) doesn't exist in set.  
 3. Store the (num, streak len) in map, so that when inserting a num between, left and right ends of streak can be found by streak len, and thus can be updated.
+
+LC274 H-Index: A scientist has index h if h of his/her N papers have at least h citations each, and the other N − h papers have no more than h citations each.  
+1. Sorting is easy.
+2. [Counting Sort](#CountingSort)
