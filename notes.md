@@ -329,4 +329,5 @@ Bit Manipulation and Trie. Not all trees are O(log(n)) search, Trie is O(M) sear
 
 LC128 Longest Consecutive Sequence O(n)  
 1. HashMap and [Union-Find](#UnionFind). O(nlog(n)) in theory.  
-2. O(n) Solution: Store numbers in set, and check each streak from its start. A num is the start of a streak if (n-1) doesn't exist in set.
+2. O(n) Solution: Store numbers in set, and check each streak from its start. A num is the start of a streak if (n-1) doesn't exist in set.  
+3. Store the (num, streak len) in map, so that when inserting a num between, left and right ends of streak can be found by streak len, and thus can be updated.
