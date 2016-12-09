@@ -33,7 +33,8 @@ Node stores the left and right indices of the sum range it represents.
 initialization: build recursively.  
 update: add delta from root to leaf.  
 resultRange: break down (i, j) to merge result of avail ranges in tree.  
-Can be applied to sum, min, max...
+Can be applied to sum, min, max...  
+(Lowest Common Ancestor in Tree can be reduced to range minimum query, smallest depth between two nodes in euler tour.)
 
 <a name="Trie"></a>
 **Trie**:  
@@ -46,6 +47,7 @@ int[] p, p[i] is the parent if i.
 Keep int[] size.  
 find(i) finds the root if i.  
 union(i, j), find roots, makes larger tree the parent.  
+Path Compression: make grand parent to be parent while finding root. `p[i] = p[p[i]]`
 
 <a name="IntervalTree"></a>
 **IntervalTree**:
@@ -324,3 +326,7 @@ Trie: First store all words in the trie (in particular, remember the words at le
 
 LC421 Maximum XOR of Two Numbers in an Array O(n)  
 Bit Manipulation and Trie. Not all trees are O(log(n)) search, Trie is O(M) search, where M is number of characters per word (or here number of bits in a num).
+
+LC128 Longest Consecutive Sequence O(n)  
+1. HashMap and [Union-Find](#UnionFind). O(nlog(n)) in theory.  
+2. O(n) Solution: Store numbers in set, and check each streak from its start. A num is the start of a streak if (n-1) doesn't exist in set.
