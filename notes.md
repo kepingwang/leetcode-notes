@@ -33,12 +33,13 @@ Node stores the left and right indices of the sum range it represents.
 initialization: build recursively.  
 update: add delta from root to leaf.  
 resultRange: break down (i, j) to merge result of avail ranges in tree.  
-Can be applied to sum, min, max...
+Can be applied to sum, min, max...  
+(Lowest Common Ancestor in Tree can be reduced to range minimum query, smallest depth between two nodes in euler tour.)
 
 <a name="Trie"></a>
 **Trie**:  
 Each node has **26** (or 256, or ...) children. Boolean flag to mark hasWord.  
-Optimize prefix string search.
+Optimize prefix string search.  Build recursively. 
 
 <a name="UnionFind"></a>
 **UnionFind**:  
@@ -46,6 +47,7 @@ int[] p, p[i] is the parent if i.
 Keep int[] size.  
 find(i) finds the root if i.  
 union(i, j), find roots, makes larger tree the parent.  
+Path Compression: make grand parent to be parent while finding root. `p[i] = p[p[i]]`
 
 <a name="IntervalTree"></a>
 **IntervalTree**:
@@ -67,6 +69,17 @@ If we go left and there is no hit. In left subtree there must be an interval [a,
 ****
 ## Algorithms
 
+### Sorting Algorithms:
+
+Can you implement merge sort and quick sort?
+
+**Heap Sort:** Can be done O(nlog(n)) totally in-place, but has poor locality, bad cache performance.
+
+<a name="CountingSort"></a>
+**Counting Sort**:
+Based on keys between a specific range. It works by counting the number of objects having distinct key values, then doing some arithmetic to calculate the position of each object in the output sentence.
+
+### Geometric Search:
 <a name="SweepLine"></a>
 **Sweep Line**:  
 Store left and right ends of line segments together, and sort these critical points.  
@@ -155,6 +168,24 @@ for (k = 0; k < V; k++)
     }
 }
  ```
+ 
+**Minimum Spanning Tree**:  
+* Cut Property: Given any cut in an edge-weighted graph (with all edge weights distinct), the crossing edge of minimum weight is in the MST of the graph.  
+* Greedy Algorithm: Start with all edges gray, find a cut with no black edges, color its minimum-weight edge black. Loop until V-1 edges are colored black.  
+
+
+**Prim's Algorithm MST**:  
+Attach an edge to a single growing tree at each time.
+![prim](https://github.com/kepingwang/leetcode-notes/blob/master/images/prim.png)  
+* Lazy Implementation O(Elog(E)):  
+![prim-lazy](https://github.com/kepingwang/leetcode-notes/blob/master/images/prim-lazy.png)
+* Eager Implementation O(Elog(V)): maintain on the priority queue just one edge for each non-tree vertex: the shortest edge that connects it to the tree.  
+![prim-eager](https://github.com/kepingwang/leetcode-notes/blob/master/images/prim-eager.png)
+
+**Kruskal's Algorithm MST**:
+Each time color black an minimum-weight gray edge that doesn't form a cycle with existing black edges.  
+![kruskal](https://github.com/kepingwang/leetcode-notes/blob/master/images/kruskal.png)  
+Implementation O(Elog(E)): priority queue to consider the edges in order by weight, _a **union-find** data structure to identify those that cause cycles_, and a queue to collect the MST edges.
 
 ****
 ## Problems
@@ -304,3 +335,14 @@ If we are doing backtracking on a 2D board, we can save the space of `boolean[][
 
 Trie: First store all words in the trie (in particular, remember the words at leaf nodes). Then start backtracking using the board with the trie starting from each board position. This is really smart. Normally we would backtrack to search for one matching path, but here since multiple matching pathes may share the same prefix, we can actually search for multiple paths simultaneously.
 
+LC421 Maximum XOR of Two Numbers in an Array O(n)  
+Bit Manipulation and Trie. Not all trees are O(log(n)) search, Trie is O(M) search, where M is number of characters per word (or here number of bits in a num).
+
+LC128 Longest Consecutive Sequence O(n)  
+1. HashMap and [Union-Find](#UnionFind). O(nlog(n)) in theory.  
+2. O(n) Solution: Store numbers in set, and check each streak from its start. A num is the start of a streak if (n-1) doesn't exist in set.  
+3. Store the (num, streak len) in map, so that when inserting a num between, left and right ends of streak can be found by streak len, and thus can be updated.
+
+LC274 H-Index: A scientist has index h if h of his/her N papers have at least h citations each, and the other N − h papers have no more than h citations each.  
+1. Sorting is easy.
+2. [Counting Sort](#CountingSort)
