@@ -355,5 +355,10 @@ LC128 Longest Consecutive Sequence O(n)
 3. Store the (num, streak len) in map, so that when inserting a num between, left and right ends of streak can be found by streak len, and thus can be updated.
 
 LC274 H-Index: A scientist has index h if h of his/her N papers have at least h citations each, and the other N − h papers have no more than h citations each.  
-1. Sorting is easy.
+1. Sorting is easy.  
 2. [Counting Sort](#CountingSort)
+
+LC162 Find Peak Element in Array. O(log(n)) required.  
+For some very simple array search problem, try to find log(n) solution! Find local maximum, mid2 = mid1+1, compare `nums[mid1]` and `nums[mid2]`  
+
+
