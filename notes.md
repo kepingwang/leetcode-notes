@@ -381,3 +381,8 @@ we do: result_when_pick_x = x + max{DP([i~x-1]), DP([x+1, j])}
 --> // the max means whenever you choose a number, the feedback is always bad and therefore leads you to a worse branch.
 then we get DP([i~j]) = min{xi, ... ,xj}  
 --> // this min makes sure that you are minimizing your cost.  
+
+LC410 Split Array Largest Sum (Split into m subarrays, minimize max sum)  
+Smart! It takes O(n) to find whether we can find m subarrays whose max sum <= a given target.  
+So use this isValid(target) to do binary search (between maxNum and totalSum).  
+
