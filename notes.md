@@ -361,3 +361,23 @@ dict = ["leet", "code"].
 Return true because "leetcode" can be segmented as "leet code".  
 1. Dynamic Programming  
 2. DFS + memoization, with Trie optimization.
+
+LC52 Max-Sum Contiguous Subarray (Kadane's algorithm)  
+DP focuses on the ending point, not the starting point. When start doesn't make sense, try end.  
+```
+public static int maxSubArray(int[] A) {
+    int maxSoFar=A[0], maxEndingHere=A[0];
+    for (int i=1;i<A.length;++i){
+    	maxEndingHere= Math.max(maxEndingHere+A[i],A[i]);
+    	maxSoFar=Math.max(maxSoFar, maxEndingHere);	
+    }
+    return maxSoFar;
+}
+```
+
+LC375 Guess Number Higher or Lower II: guess(m) pay m, what's the minimum cost to guarantee success.  
+Not Binary Search. But DP. For each number x in range[i~j]  
+we do: result_when_pick_x = x + max{DP([i~x-1]), DP([x+1, j])}  
+--> // the max means whenever you choose a number, the feedback is always bad and therefore leads you to a worse branch.
+then we get DP([i~j]) = min{xi, ... ,xj}  
+--> // this min makes sure that you are minimizing your cost.  
