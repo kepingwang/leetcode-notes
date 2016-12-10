@@ -386,3 +386,6 @@ LC410 Split Array Largest Sum (Split into m subarrays, minimize max sum)
 Smart! It takes O(n) to find whether we can find m subarrays whose max sum <= a given target.  
 So use this isValid(target) to do binary search (between maxNum and totalSum).  
 
+LC356 Line Reflection  
+First get mirror position, store all points in hash set. Then for each point, check whether its reflection is in set.  
+Can use String to encode pair. set.add(p[0]+","+p[1]);  
