@@ -79,6 +79,9 @@ G30 ??? Given a word, find the minimum number of steps required to convert word 
 
 G31 Find if a given string can be represented from a substring by iterating the substring “n” times. [link](http://www.geeksforgeeks.org/find-given-string-can-represented-substring-iterating-substring-n-times/)  
 
+G32 一段路，上面有一些树[0,20,50],路的全长就是第一棵树到最后一棵树 50.然后k个新树要插进这段公路上的，求种完这k棵树后要保持树与树之间的间距尽量小，求最小的最大间距。返回的是新种的树的位置的array。 
+
+
 ****
 
 ### Solutions (hints):
