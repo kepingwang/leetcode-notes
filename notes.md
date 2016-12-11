@@ -25,7 +25,6 @@ sum(int i): sumVal(i+1); add val and sumVal(i - (i & -i)).
 (sum(7) = val(7) + val(6) + val(4))  
 Can initialize at all 0, and then update each.
 
-
 <a name="SegmentTree"></a>
 **SegmentTree**: update(int i, int val), resultRange(int i, int j).  
 Tree implementation.  
@@ -35,6 +34,22 @@ update: add delta from root to leaf.
 resultRange: break down (i, j) to merge result of avail ranges in tree.  
 Can be applied to sum, min, max...  
 (Lowest Common Ancestor in Tree can be reduced to range minimum query, smallest depth between two nodes in euler tour.)
+
+**Threaded Binary Tree (Morris Traversal)**: O(1) space traversal  
+Make all right child pointers that would normally be NULL point to the inorder successor of the node (if it exists).  
+In-order traversal: start from leftmost node, print, if `curr is thread node`, `go to in-order successor`, else `go to the leftmost child in right subtree`.  
+To build:  
+```
+1. Initialize current as root 
+2. While current is not NULL
+   If current does not have left child
+      a) Print current’s data
+      b) Go to the right, i.e., current = current->right
+   Else
+      a) Make current as right child of the rightmost node in current's left subtree
+      b) Go to this left child, i.e., current = current->left
+```
+[link](http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/)
 
 <a name="Trie"></a>
 **Trie**:  
