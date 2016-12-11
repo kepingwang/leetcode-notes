@@ -389,3 +389,17 @@ So use this isValid(target) to do binary search (between maxNum and totalSum).
 LC356 Line Reflection  
 First get mirror position, store all points in hash set. Then for each point, check whether its reflection is in set.  
 Can use String to encode pair. set.add(p[0]+","+p[1]);  
+
+LC240 Search a 2D Matrix II (rows ordered, cols ordered, find target)  
+```
+[
+  [1,   4,  7, 11, 15],
+  [2,   5,  8, 12, 19],
+  [3,   6,  9, 16, 22],
+  [10, 13, 14, 17, 24],
+  [18, 21, 23, 26, 30]
+]
+```
+Really Smart! Start from top-right corner, compare current num with target,  
+if `target < num`, target cannot be in this column;  
+if `target > num`, target cannot be in this row.
