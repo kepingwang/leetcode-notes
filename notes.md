@@ -198,6 +198,27 @@ Each time color black an minimum-weight gray edge that doesn't form a cycle with
 ![kruskal](https://github.com/kepingwang/leetcode-notes/blob/master/images/kruskal.png)  
 Implementation O(Elog(E)): priority queue to consider the edges in order by weight, _a **union-find** data structure to identify those that cause cycles_, and a queue to collect the MST edges.
 
+### String Algorithms:
+
+**KMP (Knuth Morris Pratt) Pattern Searching**:
+Given a text txt[0..n-1] and a pattern pat[0..m-1], write a function search(char pat[], char txt[]) that prints all occurrences of pat[] in txt[]. You may assume that n > m. O(n)   
+```
+Input:  txt[] =  "AABAACAADAABAAABAA"
+        pat[] =  "AABA"
+Output: Pattern found at index 0
+        Pattern found at index 9
+        Pattern found at index 13
+```
+Bad case for naive algorithm:  
+```
+txt[] = "ABABABCABABABCABABABC"
+pat[] =  "ABABAC"
+```
+KMP basic idea: avoid matching chars that we already know will match. Uses degenerative property of the pattern (pattern having same sub-patterns appearing more than once).  
+**Preprocessing**: Construct an aux array lps[]. lps[i] is the len of the longest prefix in s[0...i] that is also a suffis of s[0...i]. Then when we have a mismatch at j, we set j = lps[j-1];
+See [geeksforgeeks](http://www.geeksforgeeks.org/searching-for-patterns-set-2-kmp-algorithm/) for detailed explanation.
+
+
 ****
 ## Problems
 
