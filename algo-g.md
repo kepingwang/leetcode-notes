@@ -73,6 +73,11 @@ G27 给个01二维矩阵，求所有为0的点到最近的1的距离，返回是
 
 G28 问关于连续的序列这种。1题很简单，好像就sort一下，已经不记得题目了；2题求是否这个array可以组成恰好若干5个连续的序列 例如［1，2，2，3，3，4，4，5，5，6］就反悔true因为可以组成12345，23456，问了数字没有上线，可以认为是正的；3题求是否这个array可以组成恰好若干x个连续的序列,这里x要大雨3 例如［1，2，2，3，3，4，4］返回true 因为可以组成1234，234。
 
+G29 ??? 给你好多点的坐标((0,1),(2,1),(4,1)(3,6)(7,9)(5,0)(0,6)(8,3))，问你这些点能组成的长方形中，面积最小是多少？
+
+G30 ??? Given a word, find the minimum number of steps required to convert word to a word with SS pattern. (each operation is counted as 1 step.)e.g : cdcc -> cdcd 或者 ccc -> cc You have the following 3 operations permitted on a word:a) Insert a character b) Delete a character c) Replace a character
+
+G31 Find if a given string can be represented from a substring by iterating the substring “n” times. [link](http://www.geeksforgeeks.org/find-given-string-can-represented-substring-iterating-substring-n-times/)  
 
 ****
 
