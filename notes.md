@@ -81,6 +81,10 @@ else:
 If we go left and there is no hit. In left subtree there must be an interval [a, max], since `max > I.lo` and there is no overlapping, we know `I.hi < a`. Since the nodes are ordered by low, then there won't be overlapping either in right subtree.
 
 
+**[Linked Sparse Matrix](http://btechsmartclass.com/DS/U1_T14.html)**  
+**LFU Cache (Similarly)**  
+
+
 ****
 ## Algorithms
 
