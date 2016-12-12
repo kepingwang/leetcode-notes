@@ -61,7 +61,7 @@ hmap.at("foo",5)=2;
 
 G22 ??? 给一个array， 一个window size, 你可以任意取任意数量的元素，要保证和最大，条件是任意两个元素的index之差必须大于等于给定的window size（感觉不应该叫window,应该叫step,就是这个地方搞得我一开始理解不了题意）， 且不能重复取同一个元素（index 相同）。如果一个元素都不取，和就是0。array中可以含有负数。
 
-G23 选举投票，给一个list of votes, 每个vote里面包含name和timestamp，另一个输入是一个截止的timestamp，要输出在这个截止的timestamp之前，谁获得的票数最多。 Follow up是输出top k，用heap做的. 给了k个人de名字求何时这几个人领先。  
+G23 ??? 选举投票，给一个list of votes, 每个vote里面包含name和timestamp，另一个输入是一个截止的timestamp，要输出在这个截止的timestamp之前，谁获得的票数最多。Follow up是输出top k. 给了k个人de名字求何时这几个人领先。  
 
 G24 在phone digital board上给你一个初始位置（0-9是valid的，左下，右下两个按键不考虑）和总共走的次数n，然后假设在初始位置上有一个国际象棋的knight，按照knight跳的规则（跟中国象棋的马的规则一样，马走日）跳n次，问你总共有多少种跳的可能性。(BFS, DFS or DP)  
 
@@ -80,6 +80,8 @@ G30 ??? Given a word, find the minimum number of steps required to convert word 
 G31 Find if a given string can be represented from a substring by iterating the substring “n” times. [link](http://www.geeksforgeeks.org/find-given-string-can-represented-substring-iterating-substring-n-times/)  
 
 G32 一段路，上面有一些树[0,20,50],路的全长就是第一棵树到最后一棵树 50.然后k个新树要插进这段公路上的，求种完这k棵树后要保持树与树之间的间距尽量小，求最小的最大间距。返回的是新种的树的位置的array。 
+
+G33 ??? 设计一个游戏。两个player，第一个人心中有一个词让第二个人来猜，第二个人有一个字典，会从字典里选词来猜。每猜一次第一个人会告诉第二个人他猜的词有几个字母和结果一样，只知道个数不知道具体哪个字母是一样的。然后让实现这个游戏，要自己想策略来减少猜词的次数。
 
 
 ****
