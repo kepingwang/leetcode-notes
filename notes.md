@@ -84,6 +84,13 @@ If we go left and there is no hit. In left subtree there must be an interval [a,
 ****
 ## Algorithms
 
+
+
+**Moore’s Voting Algorithm:** find majority in O(n)  
+[Link](http://www.geeksforgeeks.org/majority-element/).  
+First roung find one element, which must be majority if there exists a majority.
+Second round Check whether it is majority.  
+
 ### Sorting Algorithms:
 
 Can you implement merge sort and quick sort?
