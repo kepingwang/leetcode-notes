@@ -227,7 +227,7 @@ Output: Pattern found at index 0
 Bad case for naive algorithm:  
 ```
 txt[] = "ABABABCABABABCABABABC"
-pat[] =  "ABABAC"
+pat[] = "ABABAC"
 ```
 KMP basic idea: avoid matching chars that we already know will match. Uses degenerative property of the pattern (pattern having same sub-patterns appearing more than once).  
 **Preprocessing**: Construct an aux array lps[]. lps[i] is the len of the longest prefix in s[0...i] that is also a suffis of s[0...i]. Then when we have a mismatch at j, we set j = lps[j-1];
@@ -372,7 +372,7 @@ Backtracking + [Trie](#Trie).
 Backtracking: note that backtracking is different from dfs. DFS is to find a certain target vertex, while backtracking is to find a matching path. So we visit each node at most once in DFS (visited[i] = true). But in backtracking we may visit each node multiple times in different paths, so we have to remember to REMOVE NODE FROM PATH AT END OF EACH RECURSION, in particular, if we only keep boolean[] visited, we have to reset visited[i] = false.  
 If we are doing backtracking on a 2D board, we can save the space of `boolean[][] visited` by changing the values in the board.
 
-Trie: First store all words in the trie (in particular, remember the words at leaf nodes). Then start backtracking using the board with the trie starting from each board position. This is really smart. Normally we would backtrack to search for one matching path, but here since multiple matching pathes may share the same prefix, we can actually search for multiple paths simultaneously.
+Trie: First store all words in the trie (in particular, remember the words at leaf nodes). Then start backtracking using the board with the trie starting from each board position. This is really smart. Normally we would backtrack to search for one matching path, but here since multiple matching paths may share the same prefix, we can actually search for multiple paths simultaneously.
 
 LC421 Maximum XOR of Two Numbers in an Array O(n)  
 Bit Manipulation and Trie. Not all trees are O(log(n)) search, Trie is O(M) search, where M is number of characters per word (or here number of bits in a num).
@@ -439,3 +439,12 @@ LC240 Search a 2D Matrix II (rows ordered, cols ordered, find target)
 Really Smart! Start from top-right corner, compare current num with target,  
 if `target < num`, target cannot be in this column;  
 if `target > num`, target cannot be in this row.
+
+LC5 Longest Palindrome:  
+Extend palindrom from middle (odd, even). Best only O(N^2).  
+LC214 Shortest Palindrome (add to front to make s palindrome):  
+```
+Given "aacecaaa", return "aaacecaaa".
+```
+1. Reduce to finding the longest Palindrome starting at 0.
+2. So Smart! Reduce to finding the KMP lps[] for the string: "s+#+s.reverse()"  
