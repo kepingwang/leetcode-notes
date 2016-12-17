@@ -25,7 +25,6 @@ sum(int i): sumVal(i+1); add val and sumVal(i - (i & -i)).
 (sum(7) = val(7) + val(6) + val(4))  
 Can initialize at all 0, and then update each.
 
-
 <a name="SegmentTree"></a>
 **SegmentTree**: update(int i, int val), resultRange(int i, int j).  
 Tree implementation.  
@@ -35,6 +34,22 @@ update: add delta from root to leaf.
 resultRange: break down (i, j) to merge result of avail ranges in tree.  
 Can be applied to sum, min, max...  
 (Lowest Common Ancestor in Tree can be reduced to range minimum query, smallest depth between two nodes in euler tour.)
+
+**Threaded Binary Tree (Morris Traversal)**: O(1) space traversal  
+Make all right child pointers that would normally be NULL point to the inorder successor of the node (if it exists).  
+In-order traversal: start from leftmost node, print, if `curr is thread node`, `go to in-order successor`, else `go to the leftmost child in right subtree`.  
+To build:  
+```
+1. Initialize current as root 
+2. While current is not NULL
+   If current does not have left child
+      a) Print current’s data
+      b) Go to the right, i.e., current = current->right
+   Else
+      a) Make current as right child of the rightmost node in current's left subtree
+      b) Go to this left child, i.e., current = current->left
+```
+[link](http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/)
 
 <a name="Trie"></a>
 **Trie**:  
@@ -66,8 +81,19 @@ else:
 If we go left and there is no hit. In left subtree there must be an interval [a, max], since `max > I.lo` and there is no overlapping, we know `I.hi < a`. Since the nodes are ordered by low, then there won't be overlapping either in right subtree.
 
 
+**[Linked Sparse Matrix](http://btechsmartclass.com/DS/U1_T14.html)**  
+**LFU Cache (Similarly)**  
+
+
 ****
 ## Algorithms
+
+
+
+**Moore’s Voting Algorithm:** find majority in O(n)  
+[Link](http://www.geeksforgeeks.org/majority-element/).  
+First roung find one element, which must be majority if there exists a majority.
+Second round Check whether it is majority.  
 
 ### Sorting Algorithms:
 
@@ -76,8 +102,19 @@ Can you implement merge sort and quick sort?
 **Heap Sort:** Can be done O(nlog(n)) totally in-place, but has poor locality, bad cache performance.
 
 <a name="CountingSort"></a>
-**Counting Sort**:
-Based on keys between a specific range. It works by counting the number of objects having distinct key values, then doing some arithmetic to calculate the position of each object in the output sentence.
+**Counting Sort**:  
+Based on integer keys between a specific range. For example, if we have keys 2, 3, 5, then the range is [0, 5]. We count frequency of each number within range, and then the prefix sum of frequency is the number's position in the output array (After putting a number, we have to decrease that position by 1). While putting input to positions in output, iterate from the right end of input to ensure stableness.  
+ O(n+k) time, O(n+k) space, where k is range of keys.  
+
+**Radix Sort**:
+Do counting sort digit by digit (or bit by bit, or char by char) from the least significant digit. Takes time O(d * (n+b)), where d is number of digits, b is base number.  
+
+Problem: Sort n numbers in range from 0 to n^2 – 1 in linear time  
+Radix sort. If b is base size, there would be log_b(n^2) rounds, with O(n+b) each round. If we choose b = n, then we can finish in O(2 * 2n).
+
+**Bucket Sort**:
+Uniformly distributed floating point numbers within a range. Create n buckets, put input to buckets, and sort each bucket (insertion sort).  
+![Bucket Sort](https://github.com/kepingwang/leetcode-notes/blob/master/images/buckect-sort.png)
 
 ### Geometric Search:
 <a name="SweepLine"></a>
@@ -187,6 +224,27 @@ Each time color black an minimum-weight gray edge that doesn't form a cycle with
 ![kruskal](https://github.com/kepingwang/leetcode-notes/blob/master/images/kruskal.png)  
 Implementation O(Elog(E)): priority queue to consider the edges in order by weight, _a **union-find** data structure to identify those that cause cycles_, and a queue to collect the MST edges.
 
+### String Algorithms:
+
+**KMP (Knuth Morris Pratt) Pattern Searching**:
+Given a text txt[0..n-1] and a pattern pat[0..m-1], write a function search(char pat[], char txt[]) that prints all occurrences of pat[] in txt[]. You may assume that n > m. O(n)   
+```
+Input:  txt[] =  "AABAACAADAABAAABAA"
+        pat[] =  "AABA"
+Output: Pattern found at index 0
+        Pattern found at index 9
+        Pattern found at index 13
+```
+Bad case for naive algorithm:  
+```
+txt[] = "ABABABCABABABCABABABC"
+pat[] = "ABABAC"
+```
+KMP basic idea: avoid matching chars that we already know will match. Uses degenerative property of the pattern (pattern having same sub-patterns appearing more than once).  
+**Preprocessing**: Construct an aux array lps[]. lps[i] is the len of the longest prefix in s[0...i] that is also a suffis of s[0...i]. Then when we have a mismatch at j, we set j = lps[j-1];
+See [geeksforgeeks](http://www.geeksforgeeks.org/searching-for-patterns-set-2-kmp-algorithm/) for detailed explanation.
+
+
 ****
 ## Problems
 
@@ -211,12 +269,6 @@ l a d y
 ```
 Given words, find all possible word squares.  
 DFS (or BFS) + [Trie](#Trie) for faster searching.
-
-Google Phone 1: Find all identical subtrees in a binary tree  
-Although it's a tree, hashing is the best way to find same.  
-Calculate and store the hashCode of each node. O(n) all hash values.  
-Traverse the tree, keep a hash set of existing nodes (subtrees),  
-and find duplicates along the way.
 
 LC298 Binary Tree Longest Consecutive Sequence  
 LC320 Abbreviation (word -> (w1rd, 1ord, w3, ...))  
@@ -290,8 +342,6 @@ DFS + memoization.
 Lose win game: if for you win for any of the possible next steps, then I lose.
 
 LC276 Paint Fence (n posts, k colors, no 3 adjacent same color)  
-Google 2: Eat pills, half at a time, probability of getting full pill at n times.  
-Two types subproblem recursion, with memoization. (Or DP).
 
 LC253 Meeting Rooms II (find number of meeting rooms required)  
 [[0, 30],[5, 10],[15, 20]]. ans 2.
@@ -333,7 +383,7 @@ Backtracking + [Trie](#Trie).
 Backtracking: note that backtracking is different from dfs. DFS is to find a certain target vertex, while backtracking is to find a matching path. So we visit each node at most once in DFS (visited[i] = true). But in backtracking we may visit each node multiple times in different paths, so we have to remember to REMOVE NODE FROM PATH AT END OF EACH RECURSION, in particular, if we only keep boolean[] visited, we have to reset visited[i] = false.  
 If we are doing backtracking on a 2D board, we can save the space of `boolean[][] visited` by changing the values in the board.
 
-Trie: First store all words in the trie (in particular, remember the words at leaf nodes). Then start backtracking using the board with the trie starting from each board position. This is really smart. Normally we would backtrack to search for one matching path, but here since multiple matching pathes may share the same prefix, we can actually search for multiple paths simultaneously.
+Trie: First store all words in the trie (in particular, remember the words at leaf nodes). Then start backtracking using the board with the trie starting from each board position. This is really smart. Normally we would backtrack to search for one matching path, but here since multiple matching paths may share the same prefix, we can actually search for multiple paths simultaneously.
 
 LC421 Maximum XOR of Two Numbers in an Array O(n)  
 Bit Manipulation and Trie. Not all trees are O(log(n)) search, Trie is O(M) search, where M is number of characters per word (or here number of bits in a num).
@@ -344,5 +394,68 @@ LC128 Longest Consecutive Sequence O(n)
 3. Store the (num, streak len) in map, so that when inserting a num between, left and right ends of streak can be found by streak len, and thus can be updated.
 
 LC274 H-Index: A scientist has index h if h of his/her N papers have at least h citations each, and the other N − h papers have no more than h citations each.  
-1. Sorting is easy.
+1. Sorting is easy.  
 2. [Counting Sort](#CountingSort)
+
+LC162 Find Peak Element in Array. O(log(n)) required.  
+For some very simple array search problem, try to find log(n) solution! Find local maximum, mid2 = mid1+1, compare `nums[mid1]` and `nums[mid2]`  
+
+LC139 Word Break  
+Given a string s and a dictionary of words dict, determine if s can be segmented into a space-separated sequence of one or more dictionary words.  
+For example, given  
+s = "leetcode",  
+dict = ["leet", "code"].  
+Return true because "leetcode" can be segmented as "leet code".  
+1. Dynamic Programming  
+2. DFS + memoization, with Trie optimization.
+
+LC52 Max-Sum Contiguous Subarray (Kadane's algorithm)  
+DP focuses on the ending point, not the starting point. When start doesn't make sense, try end.  
+```
+public static int maxSubArray(int[] A) {
+    int maxSoFar=A[0], maxEndingHere=A[0];
+    for (int i=1;i<A.length;++i){
+    	maxEndingHere= Math.max(maxEndingHere+A[i],A[i]);
+    	maxSoFar=Math.max(maxSoFar, maxEndingHere);	
+    }
+    return maxSoFar;
+}
+```
+
+LC375 Guess Number Higher or Lower II: guess(m) pay m, what's the minimum cost to guarantee success.  
+Not Binary Search. But DP. For each number x in range[i~j]  
+we do: result_when_pick_x = x + max{DP([i~x-1]), DP([x+1, j])}  
+--> // the max means whenever you choose a number, the feedback is always bad and therefore leads you to a worse branch.
+then we get DP([i~j]) = min{xi, ... ,xj}  
+--> // this min makes sure that you are minimizing your cost.  
+
+LC410 Split Array Largest Sum (Split into m subarrays, minimize max sum)  
+Smart! It takes O(n) to find whether we can find m subarrays whose max sum <= a given target.  
+So use this isValid(target) to do binary search (between maxNum and totalSum).  
+
+LC356 Line Reflection  
+First get mirror position, store all points in hash set. Then for each point, check whether its reflection is in set.  
+Can use String to encode pair. set.add(p[0]+","+p[1]);  
+
+LC240 Search a 2D Matrix II (rows ordered, cols ordered, find target)  
+```
+[
+  [1,   4,  7, 11, 15],
+  [2,   5,  8, 12, 19],
+  [3,   6,  9, 16, 22],
+  [10, 13, 14, 17, 24],
+  [18, 21, 23, 26, 30]
+]
+```
+Really Smart! Start from top-right corner, compare current num with target,  
+if `target < num`, target cannot be in this column;  
+if `target > num`, target cannot be in this row.
+
+LC5 Longest Palindrome:  
+Extend palindrom from middle (odd, even). Best only O(N^2).  
+LC214 Shortest Palindrome (add to front to make s palindrome):  
+```
+Given "aacecaaa", return "aaacecaaa".
+```
+1. Reduce to finding the longest Palindrome starting at 0.
+2. So Smart! Reduce to finding the KMP lps[] for the string: "s+#+s.reverse()"  
